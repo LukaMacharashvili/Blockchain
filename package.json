@@ -4,11 +4,20 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node your-script.js"
+        "dev": "tsc -w",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LukaMacharashvili/Blockchain.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/LukaMacharashvili/Blockchain/issues"
+    },
+    "homepage": "https://github.com/LukaMacharashvili/Blockchain#readme",
     "devDependencies": {
         "@types/node": "^17.0.23",
         "typescript": "^4.6.3"

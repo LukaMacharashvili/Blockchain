@@ -13,7 +13,7 @@ class Transaction {
 }
 
 class Block {
-    public n = Math.round(Math.random() * 999999999999)
+    public n = Math.round(Math.random() * 999999999)
 
 
     constructor(
@@ -39,11 +39,29 @@ class BlockChain {
     constructor(
 
     ){
-        this.blockchain = [new Block(null, new Transaction(10, 'genesis', 'Luka'))]
+        this.blockchain = [new Block(null, new Transaction(1000, 'genesis', 'luka'))]
     }
 
     get getLastBlock(){
         return this.blockchain[this.blockchain.length-1]
+    }
+
+    mine(n:number){
+        let solution = 1;
+        console.log('mining....')
+    
+        while(true){
+            let hash = crypto.createHash('MD5');
+            hash.update((n + solution).toString()).end();
+
+            let attempt = hash.digest('hex');
+
+            if(attempt.substr(0, 4) === '0000'){
+                console.log(`Solution, ${solution}`);
+                return solution;
+            }
+            solution++
+        }
     }
 
     addNewBlock(transaction:Transaction, senderPublicKey:string, signature:Buffer){
@@ -54,26 +72,8 @@ class BlockChain {
 
         if(isValid){
             let newBlock = new Block(this.getLastBlock.hash, transaction)
+            this.mine(newBlock.n)
             this.blockchain.push(newBlock)
-        }
-    }
-
-    mine(n:number){
-        let solution = 1;
-        console.log('mining....')
-    
-        while(true){
-            console.log('mining....')
-            let hash = crypto.createHash('MDS');
-            hash.update((n + solution).toString()).end();
-
-            let attempt = hash.digest('hex');
-
-            if(attempt.substr(0, 4) === '0000'){
-                console.log(`Solution, ${solution}`);
-                return solution;
-            }
-            solution++
         }
     }
 }
